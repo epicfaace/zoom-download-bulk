@@ -32,22 +32,13 @@
                     "zoom-csrftoken": token
                 }
             }).then(e => e.json());
-            for (let file of res.result.batchDownloadFileList) {
-                window.open(file);
-                var fileName = link.text + " " + new URL(file).pathname.split("/").pop();
-                var uri = 'data:application/octet-stream;charset=utf-8,' + link.text;
+            for (let downloadPath of res.result.batchDownloadFileList) {
+                var fileName = link.text + " " + new URL(downloadPath).pathname.split("/").pop();
                 console.log("\t\tfile", fileName);
-                
-                var downloadLink = document.createElement("a");
-                downloadLink.href = uri;
-                downloadLink.download = fileName;
-                
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
+                window.open(downloadPath);
             }
         }
-        break;
+        //break;
     }
 
 })();
