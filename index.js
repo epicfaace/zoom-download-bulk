@@ -6,16 +6,16 @@
     }));
     const parser = new DOMParser();
     for (const link of links) {
-        console.log("link", link);
+        // console.log("link", link);
         const res = await fetch(link.href).then(e => e.text());
         const $_ = parser.parseFromString(res, "text/html");
         const items = [...$_.getElementsByClassName("clips_container")].map(e => e.innerHTML).map(e => parser.parseFromString(e, "text/html")).map(e => ({
             id: e.getElementsByClassName("downloadmeeting")[0].getAttribute("data-id"),
             startTime: e.getElementsByClassName("tobe_downloadclip_starttime")[0].value
         }));
-        console.log("\titems", items);
+        // console.log("\titems", items);
         for (const item of items) {
-            console.log("\titem", item);
+            // console.log("\titem", item);
             const token = await fetch("https://zoom.us/csrf_js", {
                 "headers": {
                     "fetch-csrf-token": "1",
@@ -34,11 +34,12 @@
             }).then(e => e.json());
             for (let downloadPath of res.result.batchDownloadFileList) {
                 var fileName = link.text + " " + new URL(downloadPath).pathname.split("/").pop();
-                console.log("\t\tfile", fileName);
+                console.log(fileName);
+                // console.log("\t\tfile", fileName);
                 window.open(downloadPath);
+                await new Promise(resolve => setTimeout(resolve, 3000)); // 3 sec
             }
         }
-        //break;
     }
 
 })();
