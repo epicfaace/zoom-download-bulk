@@ -3,6 +3,6 @@
 Drag bookmarklet to your bookmarks bar: <a href="javascript:void%20function(){(async()=%3E{const%20a=$(%22.mtg-topic%20a%22).toArray().map(a=%3E({href:a.href,text:a.text})),b=new%20DOMParser;for(const%20d%20of%20a){const%20a=await%20fetch(d.href).then(a=%3Ea.text()),e=b.parseFromString(a,%22text/html%22),f=[...e.getElementsByClassName(%22clips_container%22)].map(a=%3Ea.innerHTML).map(a=%3Eb.parseFromString(a,%22text/html%22)).map(a=%3E({id:a.getElementsByClassName(%22downloadmeeting%22)[0].getAttribute(%22data-id%22),startTime:a.getElementsByClassName(%22tobe_downloadclip_starttime%22)[0].value}));for(const%20a%20of%20f){const%20b=await%20fetch(%22https://zoom.us/csrf_js%22,{headers:{%22fetch-csrf-token%22:%221%22},method:%22POST%22,mode:%22cors%22,credentials:%22include%22}).then(a=%3Ea.text()).then(a=%3Ea.replace(%22ZOOM-CSRFTOKEN:%22,%22%22)),e=await%20fetch(`https://zoom.us/rec/download_meeting/${a.id}%3FstartTime=${a.startTime}`,{method:%22POST%22,mode:%22cors%22,credentials:%22include%22,headers:{%22zoom-csrftoken%22:b}}).then(a=%3Ea.json());for(let%20a%20of%20e.result.batchDownloadFileList){var%20c=d.text+%22%20%22+new%20URL(a).pathname.split(%22/%22).pop();console.log(c),window.open(a),await%20new%20Promise(a=%3EsetTimeout(a,3e3))}}}})()}();">Bulk Download Zoom</a>
 
 
-<h2>notes 2</h2>
+<h2>v3</h2>
 
 Create bookmarklet from https://chriszarate.github.io/bookmarkleter/
