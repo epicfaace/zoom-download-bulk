@@ -42,5 +42,6 @@
             await new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec
         }
     }
+    console.log(moveCommands.join("\n"));
 
 })();
