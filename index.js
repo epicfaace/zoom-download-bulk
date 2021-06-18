@@ -4,6 +4,7 @@
         href: e.href,
         text: e.text
     }));
+    let moveCommands = [];
     const parser = new DOMParser();
     for (const link of links) {
         // console.log("link", link);
@@ -33,12 +34,12 @@
                 }
             }).then(e => e.json());
             for (let downloadPath of res.result.batchDownloadFileList) {
-                var fileName = link.text + " " + new URL(downloadPath).pathname.split("/").pop();
-                console.log(fileName);
-                // console.log("\t\tfile", fileName);
+                var oldName = new URL(downloadPath).pathname.split("/").pop();
+                var newName = link.text + " " + new URL(downloadPath).pathname.split("/").pop();
+                moveCommands.push(`mv ${oldName} ${newName}`);
                 window.open(downloadPath);
-                await new Promise(resolve => setTimeout(resolve, 3000)); // 3 sec
             }
+            await new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec
         }
     }
 
