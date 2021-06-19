@@ -55,7 +55,8 @@ urls = ${JSON.stringify(toDownload)}
 def fetch_url(entry):
     path, uri = entry
     if not os.path.exists(path):
-        r = requests.get(uri, stream=True, headers={'cookie': '${document.cookie}'})
+        r = requests.get(uri, stream=True, headers={'referer': 'https://zoom.us/recording/management', 'cookie': '${document.cookie}'})
+        r.raise_for_status()
         if r.status_code == 200:
             with open(path, 'wb') as f:
                 for chunk in r:
