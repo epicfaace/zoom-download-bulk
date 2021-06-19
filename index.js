@@ -39,7 +39,7 @@
                 moveCommands.push(`mv "${oldName}" "${newName}"`);
                 window.open(downloadPath);
             }
-            await new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec
+            await new Promise(resolve => setTimeout(resolve, 20000)); // Wait 20 sec
         }
     }
     console.log(moveCommands.join("\n"));
