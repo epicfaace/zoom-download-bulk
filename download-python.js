@@ -55,13 +55,14 @@ urls = ${JSON.stringify(toDownload)}
 def fetch_url(entry):
     path, uri = entry
     if not os.path.exists(path):
-        r = requests.get(uri, stream=True)
+        r = requests.get(uri, stream=True, headers={'cookie': '${document.cookie}'})
         if r.status_code == 200:
             with open(path, 'wb') as f:
                 for chunk in r:
                     f.write(chunk)
     return path
 
+start = timer()
 results = ThreadPool(8).imap_unordered(fetch_url, urls)
 for path in results:
     print(path)
