@@ -37,7 +37,7 @@
                 var oldName = new URL(downloadPath).pathname.split("/").pop();
                 var newName = link.text + " " + new URL(downloadPath).pathname.split("/").pop();
                 toDownload.push([newName, downloadPath]);
-                window.open(downloadPath);
+//                 window.open(downloadPath);
             }
 //             await new Promise(resolve => setTimeout(resolve, 20000)); // Wait 20 sec
         }
