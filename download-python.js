@@ -64,7 +64,7 @@ def fetch_url(entry):
     return path
 
 start = timer()
-results = ThreadPool(8).imap_unordered(fetch_url, urls)
+results = ThreadPool(4).imap_unordered(fetch_url, urls)
 for path in results:
     print(path)
 
