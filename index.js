@@ -8,7 +8,7 @@
     const parser = new DOMParser();
     for (const link of links) {
         // console.log("link", link);
-        const res = await fetch(link.href).then(e => e.text());
+        const res = await fetch(link.href.replace("us06web.zoom.us", "zoom.us")).then(e => e.text());
         const $_ = parser.parseFromString(res, "text/html");
         const items = [...$_.getElementsByClassName("clips_container")].map(e => e.innerHTML).map(e => parser.parseFromString(e, "text/html")).map(e => ({
             id: e.getElementsByClassName("downloadmeeting")[0].getAttribute("data-id"),
